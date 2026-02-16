@@ -9,6 +9,8 @@ using UnityEngine.Windows;
 public class DialogViewManager : MonoBehaviour
 {
 
+    public Story CurrentStory { get; set; }
+
     [SerializeField] Story _currentStory;
     [SerializeField] GameObject _prefabMessage;
     [SerializeField] Transform _contentScrollView;
@@ -18,7 +20,7 @@ public class DialogViewManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InitializeCurrentStory();
+        //InitializeCurrentStory();
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class DialogViewManager : MonoBehaviour
         msg.GetComponent<TextMeshProUGUI>().color = color;
     }
 
-    private void InitializeCurrentStory()
+    public void InitializeCurrentStory()
     {
         _currentStoryIndex = 0;
         foreach (GameObject msg in _messages)
