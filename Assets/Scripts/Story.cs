@@ -7,14 +7,22 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Story", menuName = "Create/Story")]
 public class Story : ScriptableObject
 {
-
     public List<Dialog> StoryDialogs;
-
 }
-
 [Serializable]
 public class Dialog
 {
-    public string Text;
+    public DialogType type;
+    [TextArea]public string Text;
     public Color Color;
+    public Word word;
 }
+
+public enum DialogType
+{
+    Dialog,
+    Naming,
+    Sentencing
+}
+
+

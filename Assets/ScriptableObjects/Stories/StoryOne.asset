@@ -13,11 +13,69 @@ MonoBehaviour:
   m_Name: StoryOne
   m_EditorClassIdentifier: 
   StoryDialogs:
-  - Text: Bonjour
+  - type: 0
+    Text: "Malheur dans la tribu, le fils du chef est tomb\xE9 malade !"
     Color: {r: 0.509434, g: 0.252314, b: 0.252314, a: 1}
-  - Text: Au revoir
+    word: {fileID: 0}
+  - type: 0
+    Text: Les membres ne savent que faire.
     Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
-  - Text: "Peut-\xEAtre"
+    word: {fileID: 0}
+  - type: 0
+    Text: Vous cherchez dans votre esprit une solution.
     Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
-  - Text: Faut faire
-    Color: {r: 0.3741521, g: 0.50980395, b: 0.25098044, a: 1}
+    word: {fileID: 0}
+  - type: 0
+    Text: 'Vous vous rappelez quelque chose : il existe une plante miraculeuse capable
+      de prouesse.'
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+  - type: 0
+    Text: Vous vous agitez alors pour essayer de vous faire comprendre.
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+  - type: 1
+    Text: "Tous le monde vous regarde avec des yeux ronds. Vous prononcez le premier
+      son qui vous passe par la t\xEAte en montrant du doigt une fleur"
+    Color: {r: 0.2772339, g: 0.5398206, b: 0.6603774, a: 1}
+    word: {fileID: 11400000, guid: d1382af167b9e4b4c827bf712f239880, type: 2}
+  - type: 0
+    Text: "L'auditoire vous regarde, surpris. Vous r\xE9p\xE9tez le son en vous saisissant
+      de la fleur que vous d\xE9signiez. "
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+  - type: 0
+    Text: "Vous la l\xE2chez ensuite et faites de grands signes de bras. Certains
+      comprennent vos actions et partent chercher une tr\xE8s grande quantit\xE9
+      de fleurs."
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+  - type: 0
+    Text: "Mais aucune de correspond \xE0 celle que vous avez en m\xE9moire."
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+  - type: 0
+    Text: Il s'agit d'une fleur <b>rouge</b> vive.
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+  - type: 1
+    Text: Alors vous montrez du doigt un bol contenant un liquide de couleur rouge
+      et prononcez
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 11400000, guid: a9f8de76aac594041af48f8c95ad7895, type: 2}
+  - type: 0
+    Text: "Del\xE0, vous pr\xE9cisez votre id\xE9e"
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+  - type: 0
+    Text: Un homme comprend qu'il s'agit du bol.
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+  - type: 0
+    Text: 'Il s''en empare '
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+  - type: 0
+    Text: Un homme comprend qu'il s'agit du bol.
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}

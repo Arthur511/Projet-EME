@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Quest : MonoBehaviour
 {
-    public Story Story { get; private set; }
+    public Story Story => _story;
 
     [SerializeField] Story _story;
 }

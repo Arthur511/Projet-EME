@@ -6,13 +6,14 @@ public class MainGame : MonoBehaviour
 
     public static MainGame Instance;
 
-
     [Header("References")]
-    [SerializeField] DialogViewManager _dialogViewManager;
-    [SerializeField] PlayerEntries _playerEntries;
+    public DialogViewManager DialogViewManager;
+    public PlayerEntries PlayerEntries;
+    public WordLibrary WordLibrary;
 
     [SerializeField] LayerMask _questLayer;
 
+    bool _inQuest = false;
 
     private void Awake()
     {
@@ -28,7 +29,7 @@ public class MainGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (!_inQuest && Mouse.current.leftButton.wasPressedThisFrame)
         {
             CheckQuest();
         }
@@ -41,8 +42,9 @@ public class MainGame : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
         if (1 << hit.collider.gameObject.layer == _questLayer.value)
         {
-            _dialogViewManager.CurrentStory = hit.collider.gameObject.GetComponent<Quest>().Story;
-            _dialogViewManager.InitializeCurrentStory();
+            DialogViewManager.CurrentStory = hit.collider.gameObject.GetComponent<Quest>().Story;
+            DialogViewManager.InitializeCurrentStory();
+            _inQuest = true;
         }
     }
 
