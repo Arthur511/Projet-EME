@@ -6,22 +6,10 @@ using UnityEngine;
 public class WordLibrary : MonoBehaviour
 {
 
-    [SerializeField] GameObject _prefabWord;    
-    
     Dictionary<string, string> _words = new Dictionary<string, string>();
 
-    //[SerializeField] List<Word> _words;
-
-
-    public void RegisterWord(Word word)
+    public void RegisterWord(string word, string element)
     {
-        _words[word._word] = word._element;
+        _words[word] = element;
     }
-
-
-    /*public void CreateWord(string nameWord, int indexWord)
-    {
-        GameObject word = Instantiate(_prefabWord);
-        
-    }*/
 }

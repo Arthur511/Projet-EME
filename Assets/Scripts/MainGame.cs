@@ -12,8 +12,10 @@ public class MainGame : MonoBehaviour
     public WordLibrary WordLibrary;
 
     [SerializeField] LayerMask _questLayer;
+    [SerializeField] LayerMask _wordLayer;
 
     bool _inQuest = false;
+    bool _isInFusionWordMode = false;
 
     private void Awake()
     {
@@ -33,6 +35,10 @@ public class MainGame : MonoBehaviour
         {
             CheckQuest();
         }
+        if (_isInFusionWordMode && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            CheckWord();
+        }
 
     }
 
@@ -45,6 +51,15 @@ public class MainGame : MonoBehaviour
             DialogViewManager.CurrentStory = hit.collider.gameObject.GetComponent<Quest>().Story;
             DialogViewManager.InitializeCurrentStory();
             _inQuest = true;
+        }
+    }
+    private void CheckWord()
+    {
+        Vector2 pos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
+        if (1 << hit.collider.gameObject.layer == _wordLayer.value)
+        {
+            //hit.collider.gameObject.GetComponent<WordButton>().SetInformation();
         }
     }
 
