@@ -9,6 +9,7 @@ using UnityEngine.Windows;
 public class DialogViewManager : MonoBehaviour
 {
     public Story CurrentStory { get; set; }
+    public int CurrentDialogIndex => _currentStoryIndex;
 
     [SerializeField] GameObject _prefabMessage;
     [SerializeField] Transform _contentScrollView;
@@ -48,12 +49,32 @@ public class DialogViewManager : MonoBehaviour
                     CreateNewMessage(CurrentStory.StoryDialogs[_currentStoryIndex].Text, CurrentStory.StoryDialogs[_currentStoryIndex].Color);
                 else if (CurrentStory.StoryDialogs[_currentStoryIndex].type == DialogType.Naming)
                 {
+                    CreateNewMessage(CurrentStory.StoryDialogs[_currentStoryIndex].Text, CurrentStory.StoryDialogs[_currentStoryIndex].Color);
                     MainGame.Instance.PlayerEntries.WaitingForEntry(CurrentStory.StoryDialogs[_currentStoryIndex].word);
                 }
                 else if (CurrentStory.StoryDialogs[_currentStoryIndex].type == DialogType.Sentencing)
                 {
-
+                    CreateNewMessage(CurrentStory.StoryDialogs[_currentStoryIndex].Text, CurrentStory.StoryDialogs[_currentStoryIndex].Color);
+                    MainGame.Instance.PlayerEntries.WaitingForSentence(CurrentStory.StoryDialogs[_currentStoryIndex].wordsToRespond);
                 }
+            }
+        }
+    }
+
+    public void AutomaticNextDialog()
+    {
+        _currentStoryIndex++;
+        if (_currentStoryIndex < CurrentStory.StoryDialogs.Count)
+        {
+            if (CurrentStory.StoryDialogs[_currentStoryIndex].type == DialogType.Dialog)
+                CreateNewMessage(CurrentStory.StoryDialogs[_currentStoryIndex].Text, CurrentStory.StoryDialogs[_currentStoryIndex].Color);
+            else if (CurrentStory.StoryDialogs[_currentStoryIndex].type == DialogType.Naming)
+            {
+                MainGame.Instance.PlayerEntries.WaitingForEntry(CurrentStory.StoryDialogs[_currentStoryIndex].word);
+            }
+            else if (CurrentStory.StoryDialogs[_currentStoryIndex].type == DialogType.Sentencing)
+            {
+                MainGame.Instance.PlayerEntries.WaitingForSentence(CurrentStory.StoryDialogs[_currentStoryIndex].wordsToRespond);
             }
         }
     }
