@@ -7,4 +7,10 @@ public class Word : ScriptableObject
 {
     public string _word;
     public string _element;
+
+    public Word _parentA;
+    public Word _parentB;
+
+    public bool IsFused => _parentA != null && _parentB != null;
+
 }

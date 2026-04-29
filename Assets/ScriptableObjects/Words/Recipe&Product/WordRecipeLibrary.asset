@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718b0647ffec7a6459860c2234fe036e, type: 3}
+  m_Name: WordRecipeLibrary
+  m_EditorClassIdentifier: 
+  WordRecipes:
+  - {fileID: 11400000, guid: 3454c3af3f37c184a954e4705c0a73ea, type: 2}
+  - {fileID: 11400000, guid: 671e709ea119baf43b1f5b8a99970ac5, type: 2}

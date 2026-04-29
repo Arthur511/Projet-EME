@@ -10,9 +10,11 @@ public class PlayerEntries : MonoBehaviour
 
     public bool IsWaiting => _currentWord != null;
     public bool IsSentencing => _isSentencing;
+    public bool IsFusioning => _isFusioning;
 
     [SerializeField] DialogViewManager _dialogViewManager;
     [SerializeField] GameObject _entriesPanel;
+    [SerializeField] GameObject _fusionPanel;
     [SerializeField] TMP_InputField _inputField;
     [SerializeField] Transform _contentScrollView;
     [SerializeField] Transform _contentLibraryView;
@@ -20,9 +22,13 @@ public class PlayerEntries : MonoBehaviour
     [SerializeField] GameObject _prefabWord;
     [SerializeField] GameObject _removeLastWordButton;
 
+    [SerializeField] WordRecipeLibrary _recipeLibrary;
+
     bool _isSentencing = false;
+    bool _isFusioning = false;
     List<Word> _currentSentence = new List<Word>();
     List<Word> _expectedSentence;
+    List<Word> _fusionWords = new List<Word>();
 
     Word _currentWord = null;
 
@@ -37,7 +43,7 @@ public class PlayerEntries : MonoBehaviour
 
     public void OnEnter(InputAction.CallbackContext context)
     {
-        if (!IsWaiting) return;
+        if (!IsWaiting || _isFusioning) return;
         if (context.performed)
         {
             if (_inputField.text != null)
@@ -57,6 +63,8 @@ public class PlayerEntries : MonoBehaviour
             _entriesPanel.SetActive(false);
         }
     }
+
+    #region SENTENCE
     public void WaitingForSentence(List<Word> wordsExpected) // 
     {
         _isSentencing = true;
@@ -114,8 +122,6 @@ public class PlayerEntries : MonoBehaviour
         }
     }
 
-
-
     public bool CheckSentence(List<Word> expected)
     {
         string sentence = _inputField.text.Trim();
@@ -145,6 +151,67 @@ public class PlayerEntries : MonoBehaviour
         }
         return true;
     }
+    #endregion
 
+    #region FUSION
+    public void WaitingForFusion()
+    {
+        _isFusioning = true;
+        MainGame.Instance.ToolsMethods.MoveUpUISmooth(_fusionPanel);
+        _fusionWords.Clear();
 
+    }
+    public void LeaveFusionMode()
+    {
+        _isFusioning = false;
+        MainGame.Instance.ToolsMethods.MoveDownUISmooth(_fusionPanel);
+        _fusionWords.Clear();
+
+    }
+
+    public void SelectWordForFusion(Word word)
+    {
+        if (!IsFusioning) return;
+
+        if (_fusionWords.Contains(word))
+        {
+            return;
+        }
+
+        _fusionWords.Add(word);
+        
+        if (_fusionWords.Count == 2)
+        {
+            DoFusioning();
+        }
+    }
+
+    public void DoFusioning()
+    {
+        _isFusioning = false;
+        
+        Word wordOne = _fusionWords[0];
+        Word wordTwo = _fusionWords[1];
+
+        WordRecipe recipe = _recipeLibrary.CheckRecipe(wordOne, wordTwo);
+
+        if (recipe != null)
+        {
+            Word newWord = recipe.NewWord;
+            newWord._parentA = wordOne;
+            newWord._parentB = wordTwo;
+            _dialogViewManager.CreateNewMessage($"Fusion de {wordOne._word} et {wordTwo._word} pour créer {newWord._word}", Color.magenta);
+            GameObject msg = Instantiate(_prefabWord, _contentLibraryView);
+            msg.GetComponent<WordButton>().Initialize(newWord);
+            msg.GetComponentInChildren<TextMeshProUGUI>().text = newWord._word;
+            _fusionWords.Clear();
+        }
+        else
+        {
+            _dialogViewManager.CreateNewMessage($"Aucune fusion possible entre {wordOne._word} et {wordTwo._word}", Color.red);
+            _fusionWords.Clear();
+        }
+    }
+
+    #endregion
 }

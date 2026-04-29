@@ -9,7 +9,7 @@ public class MainGame : MonoBehaviour
     [Header("References")]
     public DialogViewManager DialogViewManager;
     public PlayerEntries PlayerEntries;
-    public WordLibrary WordLibrary;
+    public ToolsMethods ToolsMethods;
 
     [SerializeField] LayerMask _questLayer;
     [SerializeField] LayerMask _wordLayer;
