@@ -11,6 +11,8 @@ public class MainGame : MonoBehaviour
     public PlayerEntries PlayerEntries;
     public ToolsMethods ToolsMethods;
 
+    public bool IsInQuest { get => _inQuest; set => _inQuest = value; }
+
     [SerializeField] LayerMask _questLayer;
     [SerializeField] LayerMask _wordLayer;
 
@@ -35,10 +37,10 @@ public class MainGame : MonoBehaviour
         {
             CheckQuest();
         }
-        if (_isInFusionWordMode && Mouse.current.leftButton.wasPressedThisFrame)
+        /*if (_isInFusionWordMode && Mouse.current.leftButton.wasPressedThisFrame)
         {
             CheckWord();
-        }
+        }*/
 
     }
 
@@ -53,6 +55,9 @@ public class MainGame : MonoBehaviour
             _inQuest = true;
         }
     }
+
+
+    #region OBSOLETE
     private void CheckWord()
     {
         Vector2 pos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -62,6 +67,7 @@ public class MainGame : MonoBehaviour
             //hit.collider.gameObject.GetComponent<WordButton>().SetInformation();
         }
     }
+    #endregion
 
 
 }

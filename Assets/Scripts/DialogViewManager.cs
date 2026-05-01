@@ -1,5 +1,7 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,16 +15,28 @@ public class DialogViewManager : MonoBehaviour
 
     [SerializeField] GameObject _prefabMessage;
     [SerializeField] Transform _contentScrollView;
+    [SerializeField] ScrollRect _scrollRect;
+    [SerializeField] float _scrollDuration = 0.5f;
 
     int _currentStoryIndex = 0;
     List<GameObject> _messages = new List<GameObject>();
 
     public void CreateNewMessage(string text, Color color)
     {
-        GameObject msg = Instantiate(_prefabMessage, _contentScrollView);
-        _messages.Add(msg);
-        msg.GetComponent<TextMeshProUGUI>().text = text;
-        msg.GetComponent<TextMeshProUGUI>().color = color;
+        List<GameObject> messagesToMove = _messages.ToList();
+        GameObject temp = Instantiate(_prefabMessage, _contentScrollView);
+        temp.GetComponent<TextMeshProUGUI>().text = text;
+
+        float contentWidth = (_contentScrollView as RectTransform).rect.width;
+        RectTransform rect = temp.GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(contentWidth, 0f);
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(temp.GetComponent<RectTransform>());
+        float msgHeight = temp.GetComponent<TextMeshProUGUI>().GetPreferredValues(text, contentWidth, 0f).y;
+        Debug.Log("Message height: " + msgHeight);
+        Destroy(temp);
+        StartCoroutine(MoveMessages(messagesToMove, msgHeight, text, color));
+
     }
 
     public void InitializeCurrentStory()
@@ -41,7 +55,6 @@ public class DialogViewManager : MonoBehaviour
         if (MainGame.Instance.PlayerEntries.IsWaiting) return;
         if (context.performed)
         {
-            Debug.Log(_currentStoryIndex);
             if (_currentStoryIndex < CurrentStory.StoryDialogs.Count - 1)
             {
                 _currentStoryIndex++;
@@ -57,6 +70,11 @@ public class DialogViewManager : MonoBehaviour
                     CreateNewMessage(CurrentStory.StoryDialogs[_currentStoryIndex].Text, CurrentStory.StoryDialogs[_currentStoryIndex].Color);
                     MainGame.Instance.PlayerEntries.WaitingForSentence(CurrentStory.StoryDialogs[_currentStoryIndex].wordsToRespond);
                 }
+            }
+            else
+            {
+                CreateNewMessage("Quest's end", Color.white);
+                MainGame.Instance.IsInQuest = false;
             }
         }
     }
@@ -79,5 +97,41 @@ public class DialogViewManager : MonoBehaviour
         }
     }
 
+    IEnumerator MoveMessages(List<GameObject> messagesToMove, float heightToReach, string text, Color color)
+    {
+
+        float elapsedTime = 0;
+        Vector2[] startPositions = messagesToMove.Select(x => x.GetComponent<RectTransform>().anchoredPosition).ToArray();
+        Vector2[] endPositions = startPositions.Select(x => x + new Vector2(0, heightToReach)).ToArray();
+        while (elapsedTime < _scrollDuration)
+        {
+            for (int i = 0; i < messagesToMove.Count; i++)
+            {
+                if (messagesToMove[i] != null)
+                {
+                    messagesToMove[i].GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(startPositions[i], endPositions[i], elapsedTime / _scrollDuration);
+                }
+            }
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        for (int i = 0; i < messagesToMove.Count; i++)
+        {
+            if (messagesToMove[i] != null)
+            {
+                messagesToMove[i].GetComponent<RectTransform>().anchoredPosition = endPositions[i];
+            }
+        }
+
+        InstanciateMessage(text, color);
+    }
+
+    private void InstanciateMessage(string text, Color color)
+    {
+        GameObject msg = Instantiate(_prefabMessage, _contentScrollView);
+        msg.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        msg.GetComponentInChildren<TextMeshProUGUI>().color = color;
+        _messages.Add(msg);
+    }
 
 }
