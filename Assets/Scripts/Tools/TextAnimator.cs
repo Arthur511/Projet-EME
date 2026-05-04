@@ -1,10 +1,11 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum TextAnimationType
 {
-    None, Wave, Shake, Pulse, Rainbow, Skew, Orbit
+    None, Wave, Shake, Pulse, Rainbow, Skew, Orbit, SharpRotate
 }
 
 public class TextAnimator : MonoBehaviour
@@ -18,6 +19,7 @@ public class TextAnimator : MonoBehaviour
     [SerializeField] float _shakeAmplitude = 1f;
     [SerializeField] float _skewAmount = 1f;
 
+    float _currentTimerSharpRotation = 0f;
 
     TextMeshProUGUI _currentTextTMP;
     Mesh _currentTextMesh;
@@ -38,62 +40,143 @@ public class TextAnimator : MonoBehaviour
             var charInfo = _currentTextTMP.textInfo.characterInfo[i]; // On récupère les infos du caractère
             if (!charInfo.isVisible) continue;
 
-            if (CurrentTextAnimation == TextAnimationType.Pulse) DoPulse(i);
-            else if (CurrentTextAnimation == TextAnimationType.Rainbow) DoRainbow(i);
-            else if (CurrentTextAnimation == TextAnimationType.Skew) DoSkew(i);
-            else
-            {
-                int meshIndex = charInfo.materialReferenceIndex; // On regarde son submesh (Sa bibliothèque ou sa police d'écriture)
-                int vertexIndex = charInfo.vertexIndex; // On récupère l'index de son premier vertex (Un caractère est composé de 4 vertices)
-
-                Vector3[] vertices = _currentTextTMP.textInfo.meshInfo[meshIndex].vertices; // Liste de tout les vertex de la chaîne de caractères
-
-                // On calcule l'animation au caractère en fonction de son index
-                Vector3 offset = GetOffset(i);
-                vertices[vertexIndex] += offset;
-                vertices[vertexIndex + 1] += offset;
-                vertices[vertexIndex + 2] += offset;
-                vertices[vertexIndex + 3] += offset;
-            }
+            LaunchAnimation(CurrentTextAnimation, i);
         }
 
 
         _currentTextTMP.UpdateVertexData(TMP_VertexDataUpdateFlags.Vertices | TMP_VertexDataUpdateFlags.Colors32); // On applique visuellement les modifications précédentes sur les vertex
     }
 
-    private Vector3 GetOffset(int i)
+
+    private void LaunchAnimation(TextAnimationType animationType, int i)
     {
-        return CurrentTextAnimation switch
+        switch (animationType)
         {
-            TextAnimationType.Wave => DoWave(i),
-            TextAnimationType.Shake => DoShake(i),
-            TextAnimationType.Orbit => DoOrbit(i),
-            _ => Vector3.zero
-        };
+            case TextAnimationType.Wave:
+                DoWave();
+                break;
+            case TextAnimationType.Shake:
+                DoShake();
+                break;
+            case TextAnimationType.Orbit:
+                DoOrbit();
+                break;
+            case TextAnimationType.Pulse:
+                DoPulse(i);
+                break;
+            case TextAnimationType.Rainbow:
+                DoRainbow(i);
+                break;
+            case TextAnimationType.Skew:
+                DoSkew(i);
+                break;
+            case TextAnimationType.SharpRotate:
+                DoSharpRotate(i);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(animationType), animationType, null);
+        }
     }
 
-    private Vector3 DoOrbit(int i)
+    private void DoOrbit()
     {
-        float angle = Time.time * _waveSpeed + i * _waveFrequency;
-        float x = Mathf.Cos(angle) * _waveAmplitude;
-        float y = Mathf.Sin(angle) * _waveAmplitude;
-        return new Vector3(x, y, 0);
+        int nbChar = _currentTextTMP.textInfo.characterCount;
+        for (int i = 0; i < nbChar; i++)
+        {
+            var charInfo = _currentTextTMP.textInfo.characterInfo[i];
+            if (!charInfo.isVisible) continue;
+            int meshIndex = charInfo.materialReferenceIndex;
+            int vertexIndex = charInfo.vertexIndex;
+            Vector3[] vertices = _currentTextTMP.textInfo.meshInfo[meshIndex].vertices;
+
+            float angle = Time.time * _waveSpeed + i * _waveFrequency;
+            float x = Mathf.Cos(angle) * _waveAmplitude;
+            float y = Mathf.Sin(angle) * _waveAmplitude;
+            Vector3 offset = new Vector3(x, y, 0);
+
+            vertices[vertexIndex] += offset;
+            vertices[vertexIndex + 1] += offset;
+            vertices[vertexIndex + 2] += offset;
+            vertices[vertexIndex + 3] += offset;
+        }
     }
 
-    private Vector3 DoWave(int i)
+
+    private void DoSharpRotate(int i)
     {
-        float wave = Mathf.Sin(Time.time * _waveSpeed + i * _waveFrequency) * _waveAmplitude;
-        return new Vector3(0, wave, 0);
+        float xV, yV;
+        
+        float cooldown = 1f; // Nombre de secondes entre chaque rotation
+
+        //Debug.Log("Timer: " + _currentTimerSharpRotation);
+        if (_currentTimerSharpRotation < cooldown)
+        {
+            _currentTimerSharpRotation += Time.deltaTime;
+        }
+        else
+        {
+            int startIndex = _currentTextTMP.textInfo.characterInfo[i].vertexIndex;
+            Vector3 center = (_currentTextTMP.textInfo.meshInfo[0].vertices[startIndex] +
+                              _currentTextTMP.textInfo.meshInfo[0].vertices[startIndex + 2]) / 2;
+
+            float angle = UnityEngine.Random.Range(-180, 180);
+
+            angle *= Mathf.PI / 180; // Convertir en radians
+            for (int j = 0; j < 4; j++)
+            {
+                xV = _currentTextTMP.textInfo.meshInfo[0].vertices[startIndex + j].x - center.x;
+                yV = _currentTextTMP.textInfo.meshInfo[0].vertices[startIndex + j].y - center.y;
+
+                float rotatedX = xV * Mathf.Cos(angle) - yV * Mathf.Sin(angle);
+                float rotatedY = xV * Mathf.Sin(angle) + yV * Mathf.Cos(angle);
+
+                _currentTextTMP.textInfo.meshInfo[0].vertices[startIndex + j] = new Vector3(center.x + rotatedX, center.y + rotatedY, 0);
+            }
+            _currentTimerSharpRotation = 0f;
+
+
+        }
     }
 
-    private Vector3 DoShake(int i)
+    private void DoWave()
     {
-        return new Vector3(
-            UnityEngine.Random.Range(-_shakeAmplitude, _shakeAmplitude),
-            UnityEngine.Random.Range(-_shakeAmplitude, _shakeAmplitude),
-            0);
+        int nbChar = _currentTextTMP.textInfo.characterCount;
+        for (int i = 0; i < nbChar; i++)
+        {
+            var charInfo = _currentTextTMP.textInfo.characterInfo[i];
+            if (!charInfo.isVisible) continue;
+            int meshIndex = charInfo.materialReferenceIndex;
+            int vertexIndex = charInfo.vertexIndex;
+            Vector3[] vertices = _currentTextTMP.textInfo.meshInfo[meshIndex].vertices;
+            float wave = Mathf.Sin(Time.time * _waveSpeed + i * _waveFrequency) * _waveAmplitude;
+            Vector3 offset = new Vector3(0, wave, 0);
+            vertices[vertexIndex] += offset;
+            vertices[vertexIndex + 1] += offset;
+            vertices[vertexIndex + 2] += offset;
+            vertices[vertexIndex + 3] += offset;
+        }
     }
 
+    private void DoShake()
+    {
+        int nbChar = _currentTextTMP.textInfo.characterCount;
+        for (int i = 0; i < nbChar; i++)
+        {
+            var charInfo = _currentTextTMP.textInfo.characterInfo[i];
+            if (!charInfo.isVisible) continue;
+            int meshIndex = charInfo.materialReferenceIndex;
+            int vertexIndex = charInfo.vertexIndex;
+            Vector3[] vertices = _currentTextTMP.textInfo.meshInfo[meshIndex].vertices;
+            Vector3 offset = new Vector3(
+                UnityEngine.Random.Range(-_shakeAmplitude, _shakeAmplitude),
+                UnityEngine.Random.Range(-_shakeAmplitude, _shakeAmplitude),
+                0);
+            vertices[vertexIndex] += offset;
+            vertices[vertexIndex + 1] += offset;
+            vertices[vertexIndex + 2] += offset;
+            vertices[vertexIndex + 3] += offset;
+        }
+    }
     private void DoPulse(int i)
     {
         int startIndex = _currentTextTMP.textInfo.characterInfo[i].vertexIndex;
@@ -124,7 +207,7 @@ public class TextAnimator : MonoBehaviour
         int vertexIndex = _currentTextTMP.textInfo.characterInfo[i].vertexIndex; // On récupère l'index de son premier vertex (Un caractère est composé de 4 vertices)
         Vector3[] vertices = _currentTextTMP.textInfo.meshInfo[meshIndex].vertices; // Liste de tout les vertex de la chaîne de caractères
         float skew = Mathf.Sin(Time.time * 2f + i) * _skewAmount;
-        vertices[vertexIndex+1] += new Vector3(skew, 0, 0);
+        vertices[vertexIndex + 1] += new Vector3(skew, 0, 0);
         vertices[vertexIndex + 2] += new Vector3(skew, 0, 0);
     }
 
