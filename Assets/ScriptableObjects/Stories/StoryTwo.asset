@@ -13,11 +13,169 @@ MonoBehaviour:
   m_Name: StoryTwo
   m_EditorClassIdentifier: 
   StoryDialogs:
-  - Text: Les voix
+  - type: 0
+    Text: "Alors que vous \xEAtes en train de tresser quelque chose \xE0 partir de
+      roseaux s\xE9ch\xE9es, le chef de la tribu vous rend visite."
     Color: {r: 0.745283, g: 0.36209506, b: 0.36209506, a: 1}
-  - Text: du seigneur
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 0
+    Text: "Il vous fait signe de le suivre imm\xE9diatement."
     Color: {r: 0.42994556, g: 0.3523496, b: 0.6981132, a: 1}
-  - Text: sont
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 0
+    Text: "La marche est longue. Vous arrivez finalement vers une rivi\xE8re assez
+      tumulteuses. Et pour cause, le cours d'eau avait noy\xE9 ou emport\xE9 les
+      intr\xE9pides qui avait tent\xE9 sa travers\xE9e."
     Color: {r: 0.74509805, g: 0.36078432, b: 0.36078432, a: 1}
-  - Text: "Imp\xE9n\xE9trable"
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 0
+    Text: "Le chef vous montre du doigt l'autre rive en pronon\xE7ant : "
     Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 3
+    Text: Blaa
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 11400000, guid: 936d95f9064f65045b72386a28c9dd75, type: 2}
+    wordsToRespond: []
+  - type: 0
+    Text: " Un troupeau de cervid\xE9s broutais paisiblement."
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 0
+    Text: "Vous comprenez tout de suite l'id\xE9e du chef."
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 0
+    Text: "Trouver un moyen de traverser la rivi\xE8re pour avoir acc\xE8s \xE0 au
+      troupeau et \xE0 sa chasse."
+    Color: {r: 1, g: 0.783123, b: 0, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 0
+    Text: "Dans le m\xEAme temps que le chef appelle plus d'hommes, vous r\xE9fl\xE9chissez
+      \xE0 une solution."
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 0
+    Text: "Vous observez la rivi\xE8re, sa faible largeur ; les arbres la bordant,
+      de grande taille ; les rochers sortant \xE0 peine de la surface, le troupeau... "
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 1
+    Text: 'Vous montrez du doigt le cours d''eau en disant :'
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 11400000, guid: 9aebe50d47671994e8c668088d4a1252, type: 2}
+    wordsToRespond: []
+  - type: 1
+    Text: "Ils vous comprennent.\nVous vous appr\xEAtez \xE0 nommer ensuite les rochers,
+      mais vous vous ravisez... Sautez sur les pierres \xE9taient trop hasardeux
+      et p\xE9rilleux, surtout avec de l'\xE9quipement. Votre attention se reporte
+      sur les arbres : "
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 11400000, guid: 0869c6a8d1f79764b90453f0bc295c9b, type: 2}
+    wordsToRespond: []
+  - type: 0
+    Text: Vous mimez ensuite la coupe du tronc.
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 0
+    Text: Alors une dizaine de personnes s'approche de l'arbre. Il tambourine tel
+      que vous l'avez fait.
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 1
+    Text: "Vous les arr\xEAtez. Ils pensent que vous ne parlez que d'un arbre. Comment
+      d\xE9signer plusieurs choses identiques ?"
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 11400000, guid: 1985a3610d0934c439479ac0cf856a69, type: 2}
+    wordsToRespond: []
+  - type: 2
+    Text: "La r\xE9p\xE9tition du mot li\xE9 \xE0 l'utilisation de vos doigts permet
+      \xE0 l'auditoire que le mot signifie \"plusieurs\", ou \"plus de un\". Vous
+      parlez de plusieurs arbres :"
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond:
+    - {fileID: 11400000, guid: 1985a3610d0934c439479ac0cf856a69, type: 2}
+    - {fileID: 11400000, guid: 0869c6a8d1f79764b90453f0bc295c9b, type: 2}
+  - type: 1
+    Text: "Ils r\xE9p\xE8tent de bon coeur la phrase, pendant que vous vous saisissez
+      de votre hachette. Dans le m\xEAme temps que vous commencez \xE0 coupez l'un
+      des arbres, vous dites : "
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 11400000, guid: 9c04c75e8f4101c4da8d64ba0efe0668, type: 2}
+    wordsToRespond: []
+  - type: 2
+    Text: "Lorsque vous voyez que votre auditoire a saisi l'id\xE9e, vous lancez
+      votre ordre : Coupez les arbres !"
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond:
+    - {fileID: 11400000, guid: 9c04c75e8f4101c4da8d64ba0efe0668, type: 2}
+    - {fileID: 11400000, guid: 1985a3610d0934c439479ac0cf856a69, type: 2}
+    - {fileID: 11400000, guid: 0869c6a8d1f79764b90453f0bc295c9b, type: 2}
+  - type: 0
+    Text: "Et le monde s'affaire \xE0 mettre \xE0 bas les arbres."
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 4
+    Text: "Vous en profitez pour pr\xE9cisez la diff\xE9rence entre l'ARBRE et le
+      BOIS"
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 0
+    Text: "L'id\xE9e d\xE9sormais est de placer les troncs de fa\xE7ons \xE0 ce qu'il
+      enjambe la rivi\xE8re."
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 1
+    Text: Vous montrez une main passant SUR l'autre en mettant en valeur la position
+      entre les deux
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 11400000, guid: fbee7b8151a95e343a1add4812414be9, type: 2}
+    wordsToRespond: []
+  - type: 2
+    Text: "Un homme monte sur les \xE9paules d'un autre. Il crie le nouveau mot.
+      Vous avez tous ce qu'il faut pour expliquer votre id\xE9e."
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond:
+    - {fileID: 11400000, guid: 55662a6079da7aa4ba6aeadadc8c60b2, type: 2}
+    - {fileID: 11400000, guid: 84dee1cbd1098b647b9190250916600d, type: 2}
+    - {fileID: 11400000, guid: 9aebe50d47671994e8c668088d4a1252, type: 2}
+    - {fileID: 11400000, guid: fbee7b8151a95e343a1add4812414be9, type: 2}
+  - type: 0
+    Text: "Les hommes d\xE9placent les troncs pour les mettre perpendiculaires \xE0
+      la rivi\xE8re, enjambant ainsi le cours d'eau. "
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 4
+    Text: "Avec d'autres vous traversez le pont dont vous nommez l'id\xE9e "
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+  - type: 3
+    Text: "Un homme crie de joie, juste apr\xE8s avoir poser un pied du l'autre rive
+      : "
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 11400000, guid: 7538f9804a6c84e48b88b4de9a7b0c88, type: 2}
+    wordsToRespond: []
+  - type: 3
+    Text: "Fin de la qu\xEAte"
+    Color: {r: 0.43137258, g: 0.3529412, b: 0.69803923, a: 1}
+    word: {fileID: 11400000, guid: 7538f9804a6c84e48b88b4de9a7b0c88, type: 2}
+    wordsToRespond: []

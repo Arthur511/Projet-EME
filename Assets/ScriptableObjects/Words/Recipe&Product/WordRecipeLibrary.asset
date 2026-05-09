@@ -15,3 +15,4 @@ MonoBehaviour:
   WordRecipes:
   - {fileID: 11400000, guid: 3454c3af3f37c184a954e4705c0a73ea, type: 2}
   - {fileID: 11400000, guid: 671e709ea119baf43b1f5b8a99970ac5, type: 2}
+  - {fileID: 11400000, guid: ecede5fa3000d2a409ee2c8eb3c0f46a, type: 2}

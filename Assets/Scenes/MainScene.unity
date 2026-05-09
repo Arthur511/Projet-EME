@@ -1831,7 +1831,7 @@ GameObject:
   - component: {fileID: 941865581}
   - component: {fileID: 941865580}
   m_Layer: 5
-  m_Name: FusionButton
+  m_Name: LeaveFusionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2478,7 +2478,7 @@ GameObject:
   - component: {fileID: 1371947701}
   - component: {fileID: 1371947700}
   m_Layer: 5
-  m_Name: WordOne
+  m_Name: WordTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3289,12 +3289,16 @@ MonoBehaviour:
   _dialogViewManager: {fileID: 1117248790}
   _entriesPanel: {fileID: 1767418647}
   _fusionPanel: {fileID: 1947419146}
+  _fusionModeButton: {fileID: 941865580}
   _inputField: {fileID: 1767418649}
   _contentScrollView: {fileID: 20496303}
   _contentLibraryView: {fileID: 901167405}
   _prefabMessage: {fileID: 8882153648839715810, guid: 38685bd594ab8d34396ba0986017bbce, type: 3}
   _prefabWord: {fileID: 3224265051167063814, guid: 5ba96bcaa4eb0fc46b6ef40347d3b301, type: 3}
   _removeLastWordButton: {fileID: 1641185021}
+  _fusionTextPreview:
+  - {fileID: 1919632300}
+  - {fileID: 1371947700}
   _recipeLibrary: {fileID: 11400000, guid: e02a2cdb154e6224fb55a32ab7316f20, type: 2}
 --- !u!1 &1721772295
 GameObject:
@@ -3565,7 +3569,7 @@ GameObject:
   - component: {fileID: 1919632301}
   - component: {fileID: 1919632300}
   m_Layer: 5
-  m_Name: WordTwo
+  m_Name: WordOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3719,8 +3723,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1371947699}
   - {fileID: 1919632299}
+  - {fileID: 1371947699}
   - {fileID: 1558202482}
   - {fileID: 941865579}
   m_Father: {fileID: 177592795}

@@ -15,12 +15,15 @@ public class PlayerEntries : MonoBehaviour
     [SerializeField] DialogViewManager _dialogViewManager;
     [SerializeField] GameObject _entriesPanel;
     [SerializeField] GameObject _fusionPanel;
+    [SerializeField] Button _fusionModeButton;
     [SerializeField] TMP_InputField _inputField;
     [SerializeField] Transform _contentScrollView;
     [SerializeField] Transform _contentLibraryView;
     [SerializeField] GameObject _prefabMessage;
     [SerializeField] GameObject _prefabWord;
     [SerializeField] GameObject _removeLastWordButton;
+    [SerializeField] List<TextMeshProUGUI> _fusionTextPreview;
+
 
     [SerializeField] WordRecipeLibrary _recipeLibrary;
 
@@ -29,6 +32,7 @@ public class PlayerEntries : MonoBehaviour
     List<Word> _currentSentence = new List<Word>();
     List<Word> _expectedSentence;
     List<Word> _fusionWords = new List<Word>();
+    int _indexFusionWord = 0;
 
     Word _currentWord = null;
 
@@ -50,7 +54,7 @@ public class PlayerEntries : MonoBehaviour
             {
                 _currentWord._word = _inputField.text;
 
-                _dialogViewManager.CreateNewMessage(_inputField.text, Color.blue);
+                _dialogViewManager.CreateNewMessage(_inputField.text, Color.blue, TextAnimationType.Wave);
                 GameObject msg = Instantiate(_prefabWord, _contentLibraryView);
                 msg.GetComponent<WordButton>().Initialize(_currentWord);
                 msg.GetComponentInChildren<TextMeshProUGUI>().text = _currentWord._word;
@@ -58,11 +62,23 @@ public class PlayerEntries : MonoBehaviour
                 _inputField.text = null;
                 _inputField.ActivateInputField();
                 _currentWord = null;
+                _entriesPanel.SetActive(false);
 
             }
-            _entriesPanel.SetActive(false);
+            else
+            {
+                _dialogViewManager.CreateNewMessage("Entrée invalide, réessayez", Color.red, TextAnimationType.Shake);
+            }
         }
     }
+
+    public void AddWordInLibrary(Word element, string wordName)
+    {
+        element._word = wordName;
+        GameObject msg = Instantiate(_prefabWord, _contentLibraryView);
+        msg.GetComponent<WordButton>().Initialize(element);
+    }
+
 
     #region SENTENCE
     public void WaitingForSentence(List<Word> wordsExpected) // 
@@ -88,7 +104,7 @@ public class PlayerEntries : MonoBehaviour
     public void RemoveLastWordInSentence()
     {
         if (!IsSentencing) return;
-        _currentSentence.RemoveAt(_currentSentence.Count -1);
+        _currentSentence.RemoveAt(_currentSentence.Count - 1);
         _inputField.text = string.Join(" ", _currentSentence.ConvertAll(x => x._word));
     }
 
@@ -102,7 +118,7 @@ public class PlayerEntries : MonoBehaviour
 
             if (isValid)
             {
-                //_dialogViewManager.CreateNewMessage("Bonne réponse", Color.green);
+                _dialogViewManager.CreateNewMessage(_inputField.text, Color.cornflowerBlue, TextAnimationType.Rainbow);
                 _isSentencing = false; // On arrête de parler
                 _currentSentence.Clear();
                 _inputField.text = null;
@@ -132,12 +148,12 @@ public class PlayerEntries : MonoBehaviour
 
         if (_currentSentence.Count > expected.Count)
         {
-            _dialogViewManager.CreateNewMessage("Trop d'informations", Color.red);
+            _dialogViewManager.CreateNewMessage("Trop d'informations", Color.red, TextAnimationType.Shake);
             return false;
         }
         if (_currentSentence.Count < expected.Count)
         {
-            _dialogViewManager.CreateNewMessage("Pas assez d'informations", Color.red);
+            _dialogViewManager.CreateNewMessage("Pas assez d'informations", Color.red, TextAnimationType.Shake);
             return false;
         }
 
@@ -145,7 +161,7 @@ public class PlayerEntries : MonoBehaviour
         {
             if (!_currentSentence.Contains(expected[i]))
             {
-                _dialogViewManager.CreateNewMessage("Mauvaise information", Color.red);
+                _dialogViewManager.CreateNewMessage("Mauvaise information", Color.red, TextAnimationType.Shake);
                 return false;
             }
         }
@@ -158,6 +174,8 @@ public class PlayerEntries : MonoBehaviour
     {
         _isFusioning = true;
         MainGame.Instance.ToolsMethods.MoveUpUISmooth(_fusionPanel);
+        if (MainGame.Instance.IsInQuest)
+            _fusionModeButton.interactable = false;
         _fusionWords.Clear();
 
     }
@@ -165,6 +183,8 @@ public class PlayerEntries : MonoBehaviour
     {
         _isFusioning = false;
         MainGame.Instance.ToolsMethods.MoveDownUISmooth(_fusionPanel);
+        if (MainGame.Instance.IsInQuest)
+            _fusionModeButton.interactable = true;
         _fusionWords.Clear();
 
     }
@@ -179,17 +199,20 @@ public class PlayerEntries : MonoBehaviour
         }
 
         _fusionWords.Add(word);
-        
+        _fusionTextPreview[_indexFusionWord].text = word._word;
+        _indexFusionWord++;
+
         if (_fusionWords.Count == 2)
         {
             DoFusioning();
+            _indexFusionWord = 0;
         }
     }
 
     public void DoFusioning()
     {
         _isFusioning = false;
-        
+
         Word wordOne = _fusionWords[0];
         Word wordTwo = _fusionWords[1];
 
@@ -200,17 +223,29 @@ public class PlayerEntries : MonoBehaviour
             Word newWord = recipe.NewWord;
             newWord._parentA = wordOne;
             newWord._parentB = wordTwo;
-            _dialogViewManager.CreateNewMessage($"Fusion de {wordOne._word} et {wordTwo._word} pour créer {newWord._word}", Color.magenta);
+            newWord._word = wordOne._word + wordTwo._word;
+            _dialogViewManager.CreateNewMessage($"Fusion de {wordOne._word} et {wordTwo._word} pour créer {newWord._word}", Color.magenta, TextAnimationType.Rainbow);
             GameObject msg = Instantiate(_prefabWord, _contentLibraryView);
             msg.GetComponent<WordButton>().Initialize(newWord);
             msg.GetComponentInChildren<TextMeshProUGUI>().text = newWord._word;
             _fusionWords.Clear();
+
+            LeaveFusionMode();
+
+            if (MainGame.Instance.IsInQuest)
+            {
+                _dialogViewManager.AutomaticNextDialog();
+
+            }
         }
         else
         {
-            _dialogViewManager.CreateNewMessage($"Aucune fusion possible entre {wordOne._word} et {wordTwo._word}", Color.red);
+            _dialogViewManager.CreateNewMessage($"Aucune fusion possible entre {wordOne._word} et {wordTwo._word}", Color.red, TextAnimationType.None);
             _fusionWords.Clear();
+            _isFusioning = true;
         }
+        _fusionTextPreview[0].text = "Mot 1";
+        _fusionTextPreview[1].text = "Mot 2";
     }
 
     #endregion

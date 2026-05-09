@@ -370,8 +370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934809dee2d92a54982ab5b0d0156517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentTextAnimation: 7
-  _waveFrequency: 5
+  CurrentTextAnimation: 10
+  _waveFrequency: 1
   _waveAmplitude: 2
   _waveSpeed: 1
   _shakeAmplitude: 1

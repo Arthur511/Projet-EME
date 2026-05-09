@@ -20,6 +20,7 @@ public class Dialog
     
     public Word word;
     public List<Word> wordsToRespond;
+    public TextAnimationType animationType;
 
 }
 
@@ -27,7 +28,9 @@ public enum DialogType
 {
     Dialog,
     Naming,
-    Sentencing
+    Sentencing,
+    AddWord,
+    Fusioning
 }
 
 
