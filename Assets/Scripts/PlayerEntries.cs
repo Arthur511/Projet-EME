@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,7 +26,6 @@ public class PlayerEntries : MonoBehaviour
     [SerializeField] GameObject _removeLastWordButton;
     [SerializeField] List<TextMeshProUGUI> _fusionTextPreview;
 
-
     [SerializeField] WordRecipeLibrary _recipeLibrary;
 
     bool _isSentencing = false;
@@ -33,8 +34,25 @@ public class PlayerEntries : MonoBehaviour
     List<Word> _expectedSentence;
     List<Word> _fusionWords = new List<Word>();
     int _indexFusionWord = 0;
+    List<GameObject> _wordButtons = new List<GameObject>();
 
     Word _currentWord = null;
+
+    private void VerifyWordInDouble(string element)
+    {
+        foreach (GameObject word in _wordButtons)
+        {
+            if (word.GetComponent<WordButton>() != null)
+            {
+                if (word.GetComponent<WordButton>()._word._element == element)
+                {
+                    Destroy(word);
+                    _wordButtons.Remove(word);
+                    return;
+                }
+            }
+        }
+    }
 
     public void WaitingForEntry(Word word)
     {
@@ -56,6 +74,8 @@ public class PlayerEntries : MonoBehaviour
 
                 _dialogViewManager.CreateNewMessage(_inputField.text, Color.blue, TextAnimationType.Wave);
                 GameObject msg = Instantiate(_prefabWord, _contentLibraryView);
+                VerifyWordInDouble(_currentWord._element);
+                _wordButtons.Add(msg);
                 msg.GetComponent<WordButton>().Initialize(_currentWord);
                 msg.GetComponentInChildren<TextMeshProUGUI>().text = _currentWord._word;
 
@@ -76,6 +96,8 @@ public class PlayerEntries : MonoBehaviour
     {
         element._word = wordName;
         GameObject msg = Instantiate(_prefabWord, _contentLibraryView);
+        VerifyWordInDouble(_currentWord._element);
+        _wordButtons.Add(msg);
         msg.GetComponent<WordButton>().Initialize(element);
     }
 
@@ -223,9 +245,22 @@ public class PlayerEntries : MonoBehaviour
             Word newWord = recipe.NewWord;
             newWord._parentA = wordOne;
             newWord._parentB = wordTwo;
-            newWord._word = wordOne._word + wordTwo._word;
+
+
+            if (MainGame.Instance.ToolsMethods.Vowels.Contains(wordOne._word[wordOne._word.Length - 1]))
+            {
+                string compressionWord = wordOne._word.Substring(0, wordOne._word.Length - 1);
+                newWord._word = compressionWord + wordTwo._word;
+            }
+            else
+            {
+                newWord._word = wordOne._word + wordTwo._word;
+
+            }
             _dialogViewManager.CreateNewMessage($"Fusion de {wordOne._word} et {wordTwo._word} pour créer {newWord._word}", Color.magenta, TextAnimationType.Rainbow);
             GameObject msg = Instantiate(_prefabWord, _contentLibraryView);
+            VerifyWordInDouble(newWord._element);
+            _wordButtons.Add(msg);
             msg.GetComponent<WordButton>().Initialize(newWord);
             msg.GetComponentInChildren<TextMeshProUGUI>().text = newWord._word;
             _fusionWords.Clear();
@@ -249,4 +284,6 @@ public class PlayerEntries : MonoBehaviour
     }
 
     #endregion
+
+
 }

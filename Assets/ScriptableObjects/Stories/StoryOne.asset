@@ -101,14 +101,91 @@ MonoBehaviour:
     wordsToRespond: []
     animationType: 0
   - type: 0
-    Text: 'Il s''en empare '
+    Text: "Il s'en empare et s'appr\xEAte \xE0 renverser le contenu sur les fleurs."
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+    animationType: 0
+  - type: 1
+    Text: "Vous l'arr\xEAtez imm\xE9diatement, et chercher un mot-particule pour
+      parler de couleur."
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 11400000, guid: 8ecfd69ffc8a90548af8bb0df721a644, type: 2}
+    wordsToRespond: []
+    animationType: 0
+  - type: 4
+    Text: "Puis vous vous empressez de m\xE9langer ce nouveau terme \xE0 celui de
+      la fleur. "
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 11400000, guid: 8ecfd69ffc8a90548af8bb0df721a644, type: 2}
+    wordsToRespond: []
+    animationType: 0
+  - type: 0
+    Text: "Del\xE0 vous prononcez plusieurs fois le mot \"ROUGE\", en d\xE9signant
+      quatre \xE0 cinq \xE9l\xE9ments de cette couleur."
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+    animationType: 0
+  - type: 2
+    Text: "Vous r\xE9p\xE9tez enfin votre demande initiale."
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+    wordsToRespond:
+    - {fileID: 11400000, guid: d1382af167b9e4b4c827bf712f239880, type: 2}
+    - {fileID: 11400000, guid: a9f8de76aac594041af48f8c95ad7895, type: 2}
+    animationType: 0
+  - type: 0
+    Text: "Et enfin la miraculeuse plante est trouv\xE9. Le chef vous demande maintenant
+      ce qu'il faut faire."
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+    animationType: 0
+  - type: 1
+    Text: "Vous vous saisissez d'une baie, et montrer ensuite d'une graine, de racines,
+      de poissons, tout \xE9l\xE9ments comestibles, et dites : "
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 11400000, guid: 78b1d9d8ec648c94dbb04f4fc2b5f102, type: 2}
+    wordsToRespond: []
+    animationType: 0
+  - type: 1
+    Text: 'Vous posez votre doigt sur votre bouche : '
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 11400000, guid: b325fa4218a3f1a4c8065506abccc102, type: 2}
+    wordsToRespond: []
+    animationType: 0
+  - type: 4
+    Text: Enfin vous MANGEZ la baie.
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+    wordsToRespond: []
+    animationType: 0
+  - type: 2
+    Text: Il faut que l'enfant mange la fleur rouge.
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 0}
+    wordsToRespond:
+    - {fileID: 11400000, guid: e5edc0393a0a69d40945e4a07eeb403a, type: 2}
+    - {fileID: 11400000, guid: d1382af167b9e4b4c827bf712f239880, type: 2}
+    - {fileID: 11400000, guid: a9f8de76aac594041af48f8c95ad7895, type: 2}
+    animationType: 0
+  - type: 0
+    Text: "On fait ing\xE9rer la fleur rouge \xE0 l'enfant, qui, le lendemain arpente
+      le campement de la tribu en courant."
     Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
     animationType: 0
   - type: 0
-    Text: Un homme comprend qu'il s'agit du bol.
+    Text: "Le chef, heureux, vient \xE0 votre rencontre pour vous remerciez"
     Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
     word: {fileID: 0}
+    wordsToRespond: []
+    animationType: 0
+  - type: 3
+    Text: Mui
+    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    word: {fileID: 11400000, guid: 4d240f7791e9b4c438f1bcba173ab790, type: 2}
     wordsToRespond: []
     animationType: 0

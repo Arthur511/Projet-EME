@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WordButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    Word _word;
+    [HideInInspector] public Word _word;
     public void Initialize(Word word) // Method to initialize the button with a Word object, each button has the element and his signification
     {
         _word = word;

@@ -22,6 +22,7 @@ public class DialogViewManager : MonoBehaviour
     Dialog _currentDialog;
     List<GameObject> _messages = new List<GameObject>();
 
+
     private void Start()
     {
         _currentDialog = CurrentStory.StoryDialogs[_currentStoryIndex];
