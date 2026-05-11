@@ -93,6 +93,8 @@ public class DialogViewManager : MonoBehaviour
             {
                 CreateNewMessage("Quest's end", Color.white, CurrentStory.StoryDialogs[_currentStoryIndex].animationType = TextAnimationType.None);
                 MainGame.Instance.IsInQuest = false;
+                MainGame.Instance.CurrentQuest.RevealNextQuests();
+                MainGame.Instance.PlayerEntries.FusionModeButton.interactable = true;
             }
         }
     }

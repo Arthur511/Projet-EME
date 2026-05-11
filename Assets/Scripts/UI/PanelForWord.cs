@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PanelForWord : MonoBehaviour
 {
-
     public static PanelForWord Instance { get; private set; }
 
     [SerializeField] private GameObject _panelForWord;

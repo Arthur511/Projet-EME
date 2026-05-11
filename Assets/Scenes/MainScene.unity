@@ -996,8 +996,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 674.4546, y: 64.13599}
-  m_SizeDelta: {x: 571.0905, y: 951.728}
+  m_AnchoredPosition: {x: 674.4546, y: 37.63788}
+  m_SizeDelta: {x: 571.0905, y: 898.7318}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &581029929
 MonoBehaviour:
@@ -1067,37 +1067,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581029927}
   m_CullTransparentMesh: 1
---- !u!1 &630051991
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 630051993}
-  m_Layer: 0
-  m_Name: WordRecipeLibrary
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &630051993
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630051991}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 419.35403, y: 450.81174, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &633602751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,7 +1080,7 @@ GameObject:
   - component: {fileID: 633602752}
   - component: {fileID: 633602755}
   m_Layer: 6
-  m_Name: Quest (1)
+  m_Name: Quest II
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1182,8 +1151,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.91, y: 1.6800001, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 538518448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1200,6 +1169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _story: {fileID: 11400000, guid: 2ef9f255d2a8a69429370cc731a1930a, type: 2}
+  _lockStories: []
 --- !u!61 &633602755
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2087,7 +2057,7 @@ GameObject:
   - component: {fileID: 1301639188}
   - component: {fileID: 1301639191}
   m_Layer: 6
-  m_Name: Quest
+  m_Name: Quest I
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2158,8 +2128,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 538518448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2176,6 +2146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _story: {fileID: 11400000, guid: 85b5e107873e567478d1dd6658a985b1, type: 2}
+  _lockStories:
+  - {fileID: 633602751}
 --- !u!61 &1301639191
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3133,6 +3105,7 @@ MonoBehaviour:
   _wordLayer:
     serializedVersion: 2
     m_Bits: 0
+  _firstQuest: {fileID: 1301639187}
 --- !u!4 &1670792215
 Transform:
   m_ObjectHideFlags: 0
@@ -3289,7 +3262,8 @@ MonoBehaviour:
   _dialogViewManager: {fileID: 1117248790}
   _entriesPanel: {fileID: 1767418647}
   _fusionPanel: {fileID: 1947419146}
-  _fusionModeButton: {fileID: 941865580}
+  _fusionModeButton: {fileID: 939216638}
+  _leaveFusionModeButton: {fileID: 941865580}
   _inputField: {fileID: 1767418649}
   _contentScrollView: {fileID: 20496303}
   _contentLibraryView: {fileID: 901167405}
@@ -4185,6 +4159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a366ac693fadd4b82d804b079ae159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Vowels: 61006500
 --- !u!4 &2139792593
 Transform:
   m_ObjectHideFlags: 0
@@ -4311,5 +4286,4 @@ SceneRoots:
   - {fileID: 177592795}
   - {fileID: 1721772298}
   - {fileID: 1117248791}
-  - {fileID: 630051993}
   - {fileID: 2139792593}

@@ -186,6 +186,6 @@ MonoBehaviour:
   - type: 3
     Text: Mui
     Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
-    word: {fileID: 11400000, guid: 4d240f7791e9b4c438f1bcba173ab790, type: 2}
+    word: {fileID: 11400000, guid: 36d4ce984b8624244962f1ebffec7bdf, type: 2}
     wordsToRespond: []
     animationType: 0

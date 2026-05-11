@@ -16,7 +16,7 @@ public class TextAnimator : MonoBehaviour
     public float _waveAmplitude = 0.05f;
     public float _waveSpeed = 1f;
 
-    public float _shakeAmplitude = 1f;
+    public float _shakeAmplitude = 0.5f;
     public float _skewAmount = 1f;
 
 
@@ -26,6 +26,7 @@ public class TextAnimator : MonoBehaviour
     float[] _sharpRotationAngles;
     float _currentTimerSharpRotation = 0f;
     //float _currentTimerSharpRotation;
+    float _animationTimer = 1f;
 
     // À initialiser quand le texte change
 
@@ -35,36 +36,39 @@ public class TextAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CurrentTextAnimation == TextAnimationType.SharpRotate)
+        if (_animationTimer > 0f)
         {
-            _currentTimerSharpRotation += Time.deltaTime;
-            if (_currentTimerSharpRotation >= 1f)
+            if (CurrentTextAnimation == TextAnimationType.SharpRotate)
             {
-                // Nouveau angle aléatoire pour chaque lettre
-                for (int k = 0; k < _sharpRotationAngles.Length; k++)
-                    _sharpRotationAngles[k] = UnityEngine.Random.Range(-Mathf.PI, Mathf.PI);
+                _currentTimerSharpRotation += Time.deltaTime;
+                if (_currentTimerSharpRotation >= 1f)
+                {
+                    // Nouveau angle aléatoire pour chaque lettre
+                    for (int k = 0; k < _sharpRotationAngles.Length; k++)
+                        _sharpRotationAngles[k] = UnityEngine.Random.Range(-Mathf.PI, Mathf.PI);
 
-                _currentTimerSharpRotation = 0f;
+                    _currentTimerSharpRotation = 0f;
+                }
             }
+
+
+            _currentTextTMP.ForceMeshUpdate();
+            _currentTextMesh = _currentTextTMP.mesh;
+
+            var nbChar = _currentTextTMP.textInfo.characterCount;
+
+
+            for (int i = 0; i < nbChar; i++) // Pour chaque caractère du texte
+            {
+                var charInfo = _currentTextTMP.textInfo.characterInfo[i]; // On récupère les infos du caractère
+                if (!charInfo.isVisible) continue;
+
+                LaunchAnimation(CurrentTextAnimation, i);
+            }
+
+
+            _currentTextTMP.UpdateVertexData(TMP_VertexDataUpdateFlags.Vertices | TMP_VertexDataUpdateFlags.Colors32); // On applique visuellement les modifications précédentes sur les vertex
         }
-
-
-        _currentTextTMP.ForceMeshUpdate();
-        _currentTextMesh = _currentTextTMP.mesh;
-
-        var nbChar = _currentTextTMP.textInfo.characterCount;
-
-
-        for (int i = 0; i < nbChar; i++) // Pour chaque caractère du texte
-        {
-            var charInfo = _currentTextTMP.textInfo.characterInfo[i]; // On récupère les infos du caractère
-            if (!charInfo.isVisible) continue;
-
-            LaunchAnimation(CurrentTextAnimation, i);
-        }
-
-
-        _currentTextTMP.UpdateVertexData(TMP_VertexDataUpdateFlags.Vertices | TMP_VertexDataUpdateFlags.Colors32); // On applique visuellement les modifications précédentes sur les vertex
     }
 
 
@@ -75,6 +79,7 @@ public class TextAnimator : MonoBehaviour
 
     private void LaunchAnimation(TextAnimationType animationType, int i)
     {
+        
         switch (animationType)
         {
             case TextAnimationType.Wave:
@@ -234,15 +239,15 @@ public class TextAnimator : MonoBehaviour
             int meshIndex = charInfo.materialReferenceIndex;
             int vertexIndex = charInfo.vertexIndex;
             Vector3[] vertices = _currentTextTMP.textInfo.meshInfo[meshIndex].vertices;
-            
+
             float t = Time.time * _waveSpeed + i * _waveFrequency;
             float sin = Mathf.Abs(Mathf.Sin(t));
-            
+
             Vector3 offset = new Vector3(
                 0,
-                Mathf.Pow(sin, 0.5f)*_waveAmplitude,
+                Mathf.Pow(sin, 0.5f) * _waveAmplitude,
                 0);
-            
+
             vertices[vertexIndex] += offset;
             vertices[vertexIndex + 1] += offset;
             vertices[vertexIndex + 2] += offset;

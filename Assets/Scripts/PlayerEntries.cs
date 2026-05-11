@@ -13,11 +13,13 @@ public class PlayerEntries : MonoBehaviour
     public bool IsWaiting => _currentWord != null;
     public bool IsSentencing => _isSentencing;
     public bool IsFusioning => _isFusioning;
+    public Button FusionModeButton => _fusionModeButton;
 
     [SerializeField] DialogViewManager _dialogViewManager;
     [SerializeField] GameObject _entriesPanel;
     [SerializeField] GameObject _fusionPanel;
     [SerializeField] Button _fusionModeButton;
+    [SerializeField] Button _leaveFusionModeButton;
     [SerializeField] TMP_InputField _inputField;
     [SerializeField] Transform _contentScrollView;
     [SerializeField] Transform _contentLibraryView;
@@ -38,7 +40,9 @@ public class PlayerEntries : MonoBehaviour
 
     Word _currentWord = null;
 
-    private void VerifyWordInDouble(string element)
+
+    #region USEFUL METHODS
+    private void VerifyElementInDouble(string element)
     {
         foreach (GameObject word in _wordButtons)
         {
@@ -53,12 +57,33 @@ public class PlayerEntries : MonoBehaviour
             }
         }
     }
+    private bool VerifyWordInDouble(string word)
+    {
+        foreach (GameObject item in _wordButtons)
+        {
+            if (item.GetComponent<WordButton>() != null)
+            {
+                if (item.GetComponent<WordButton>()._word._word.ToLower() == word.ToLower())
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private string FirstCharacterToUpper(string s)
+    {
+        return char.ToUpper(s[0]) + s.Substring(1);
+    }
+    #endregion
 
     public void WaitingForEntry(Word word)
     {
         _currentWord = word;
         _entriesPanel.SetActive(true);
         _inputField.text = "";
+        _inputField.enabled = true;
         _inputField.interactable = true;
         _inputField.ActivateInputField();
     }
@@ -68,14 +93,33 @@ public class PlayerEntries : MonoBehaviour
         if (!IsWaiting || _isFusioning) return;
         if (context.performed)
         {
-            if (_inputField.text != null)
+            if (_inputField.text.TrimEnd().Length == 0 || _inputField.text.Length > 3)
+            {
+                _dialogViewManager.CreateNewMessage("Entrée invalide, réessayez", Color.red, TextAnimationType.Shake);
+                _inputField.text = null;
+                _inputField.ActivateInputField();
+            }
+            else if (VerifyWordInDouble(_inputField.text))
+            {
+                _dialogViewManager.CreateNewMessage("Mot déjà utilisé pour un autre concept, réessayez", Color.red, TextAnimationType.Shake);
+                _inputField.text = null;
+                _inputField.ActivateInputField();
+            }
+            else if (_inputField.text != null)
             {
                 _currentWord._word = _inputField.text;
-
-                _dialogViewManager.CreateNewMessage(_inputField.text, Color.blue, TextAnimationType.Wave);
+                string factorizedWord = _inputField.text.ToLower();
+                factorizedWord = FirstCharacterToUpper(factorizedWord);
+                _dialogViewManager.CreateNewMessage(factorizedWord, Color.blue, TextAnimationType.Wave);
                 GameObject msg = Instantiate(_prefabWord, _contentLibraryView);
-                VerifyWordInDouble(_currentWord._element);
+
+
+                VerifyElementInDouble(_currentWord._element);
                 _wordButtons.Add(msg);
+
+
+                _currentWord._word = _currentWord._word.ToLower();
+                _currentWord._word = FirstCharacterToUpper(_currentWord._word);
                 msg.GetComponent<WordButton>().Initialize(_currentWord);
                 msg.GetComponentInChildren<TextMeshProUGUI>().text = _currentWord._word;
 
@@ -85,10 +129,6 @@ public class PlayerEntries : MonoBehaviour
                 _entriesPanel.SetActive(false);
 
             }
-            else
-            {
-                _dialogViewManager.CreateNewMessage("Entrée invalide, réessayez", Color.red, TextAnimationType.Shake);
-            }
         }
     }
 
@@ -96,7 +136,7 @@ public class PlayerEntries : MonoBehaviour
     {
         element._word = wordName;
         GameObject msg = Instantiate(_prefabWord, _contentLibraryView);
-        VerifyWordInDouble(_currentWord._element);
+        //VerifyWordInDouble(_currentWord._element);
         _wordButtons.Add(msg);
         msg.GetComponent<WordButton>().Initialize(element);
     }
@@ -109,6 +149,7 @@ public class PlayerEntries : MonoBehaviour
         _expectedSentence = wordsExpected;
         _currentSentence.Clear();
         _entriesPanel.SetActive(true);
+        _inputField.enabled = false;
         _inputField.interactable = false;
         _inputField.text = null;
         _removeLastWordButton.SetActive(true);
@@ -119,6 +160,8 @@ public class PlayerEntries : MonoBehaviour
     {
         if (!IsSentencing) return;
         _currentSentence.Add(word);
+        if (_currentSentence.Count > 1)
+            word._word = word._word.ToLower();
         _inputField.text += word._word + " ";
 
     }
@@ -197,7 +240,7 @@ public class PlayerEntries : MonoBehaviour
         _isFusioning = true;
         MainGame.Instance.ToolsMethods.MoveUpUISmooth(_fusionPanel);
         if (MainGame.Instance.IsInQuest)
-            _fusionModeButton.interactable = false;
+            _leaveFusionModeButton.interactable = false;
         _fusionWords.Clear();
 
     }
@@ -206,7 +249,7 @@ public class PlayerEntries : MonoBehaviour
         _isFusioning = false;
         MainGame.Instance.ToolsMethods.MoveDownUISmooth(_fusionPanel);
         if (MainGame.Instance.IsInQuest)
-            _fusionModeButton.interactable = true;
+            _leaveFusionModeButton.interactable = true;
         _fusionWords.Clear();
 
     }
@@ -250,16 +293,18 @@ public class PlayerEntries : MonoBehaviour
             if (MainGame.Instance.ToolsMethods.Vowels.Contains(wordOne._word[wordOne._word.Length - 1]))
             {
                 string compressionWord = wordOne._word.Substring(0, wordOne._word.Length - 1);
-                newWord._word = compressionWord + wordTwo._word;
+                newWord._word = compressionWord.ToLower() + wordTwo._word.ToLower();
             }
             else
             {
-                newWord._word = wordOne._word + wordTwo._word;
-
+                newWord._word = wordOne._word.ToLower() + wordTwo._word.ToLower();
             }
+            newWord._word.ToLower();
+            newWord._word = FirstCharacterToUpper(newWord._word);
+
             _dialogViewManager.CreateNewMessage($"Fusion de {wordOne._word} et {wordTwo._word} pour créer {newWord._word}", Color.magenta, TextAnimationType.Rainbow);
             GameObject msg = Instantiate(_prefabWord, _contentLibraryView);
-            VerifyWordInDouble(newWord._element);
+            VerifyElementInDouble(newWord._element);
             _wordButtons.Add(msg);
             msg.GetComponent<WordButton>().Initialize(newWord);
             msg.GetComponentInChildren<TextMeshProUGUI>().text = newWord._word;
