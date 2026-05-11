@@ -68,7 +68,7 @@ MonoBehaviour:
     wordsToRespond: []
     animationType: 0
   - type: 0
-    Text: "Mais aucune de correspond \xE0 celle que vous avez en m\xE9moire."
+    Text: "Mais aucune ne correspond \xE0 celle que vous avez en m\xE9moire."
     Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
@@ -87,7 +87,7 @@ MonoBehaviour:
     wordsToRespond: []
     animationType: 0
   - type: 2
-    Text: "Del\xE0, vous pr\xE9cisez votre id\xE9e"
+    Text: "Del\xE0, vous pr\xE9cisez votre id\xE9e."
     Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
     word: {fileID: 0}
     wordsToRespond:
