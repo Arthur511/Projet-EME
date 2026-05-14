@@ -27,7 +27,7 @@ public class PanelForWord : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _rectTransform.position = Mouse.current.position.ReadValue() + new Vector2(150, 80); ;
+        _rectTransform.position = Mouse.current.position.ReadValue() + new Vector2(170, 80);
     }
     
     public void ShowPanel(Word word)
