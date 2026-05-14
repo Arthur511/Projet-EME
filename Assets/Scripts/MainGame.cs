@@ -68,10 +68,10 @@ public class MainGame : MonoBehaviour
     {
         Vector2 pos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
-        if (1 << hit.collider.gameObject.layer == _wordLayer.value)
+        /*if (1 << hit.collider.gameObject.layer == _wordLayer.value)
         {
             //hit.collider.gameObject.GetComponent<WordButton>().SetInformation();
-        }
+        }*/
     }
     #endregion
 
