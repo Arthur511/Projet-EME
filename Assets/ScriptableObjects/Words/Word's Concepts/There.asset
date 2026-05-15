@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: There
   m_EditorClassIdentifier: 
   _word: 
-  _element: There
+  _element: "L\xE0"
   _parentA: {fileID: 0}
   _parentB: {fileID: 0}

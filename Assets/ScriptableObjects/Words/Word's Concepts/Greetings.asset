@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Greetings
   m_EditorClassIdentifier: 
   _word: 
-  _element: Hello
+  _element: Bonjour
+  _parentA: {fileID: 0}
+  _parentB: {fileID: 0}

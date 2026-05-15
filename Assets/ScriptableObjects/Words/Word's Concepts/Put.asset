@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Put
   m_EditorClassIdentifier: 
   _word: 
-  _element: Put
+  _element: Mettre
   _parentA: {fileID: 0}
   _parentB: {fileID: 0}

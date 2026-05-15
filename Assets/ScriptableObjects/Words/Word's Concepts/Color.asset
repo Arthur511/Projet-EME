@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Color
   m_EditorClassIdentifier: 
   _word: 
-  _element: Color
+  _element: Couleur
+  _parentA: {fileID: 0}
+  _parentB: {fileID: 0}

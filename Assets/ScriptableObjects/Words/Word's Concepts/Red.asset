@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2695ace60393e5d4b8ae1d00f7c3dfa8, type: 3}
   m_Name: Red
   m_EditorClassIdentifier: 
-  _word: 
-  _element: Red
-  _wordIndex: 2
-  _otherWordsMixableWith: 00000000
+  _word: Veb
+  _element: Rouge
+  _parentA: {fileID: 0}
+  _parentB: {fileID: 0}

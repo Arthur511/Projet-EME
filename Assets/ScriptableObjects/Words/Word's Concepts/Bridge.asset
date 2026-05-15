@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bridge
   m_EditorClassIdentifier: 
   _word: 
-  _element: Bridge
+  _element: Pont
   _parentA: {fileID: 0}
   _parentB: {fileID: 0}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Wood
   m_EditorClassIdentifier: 
   _word: 
-  _element: Wood
+  _element: Bois
   _parentA: {fileID: 0}
   _parentB: {fileID: 0}

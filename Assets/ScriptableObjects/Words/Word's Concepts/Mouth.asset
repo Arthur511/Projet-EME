@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Mouth
   m_EditorClassIdentifier: 
   _word: 
-  _element: Mouth
+  _element: Bouche
+  _parentA: {fileID: 0}
+  _parentB: {fileID: 0}

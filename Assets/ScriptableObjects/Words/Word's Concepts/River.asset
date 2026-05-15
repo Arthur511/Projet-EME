@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: River
   m_EditorClassIdentifier: 
   _word: 
-  _element: River
+  _element: "Rivi\xE8re"
   _parentA: {fileID: 0}
   _parentB: {fileID: 0}

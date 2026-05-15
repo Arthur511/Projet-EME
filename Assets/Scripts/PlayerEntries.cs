@@ -95,13 +95,13 @@ public class PlayerEntries : MonoBehaviour
         {
             if (_inputField.text.TrimEnd().Length == 0 || _inputField.text.Length > 3)
             {
-                _dialogViewManager.CreateNewMessage("Entrée invalide, réessayez", Color.red, TextAnimationType.Shake);
+                _dialogViewManager.CreateNewMessage("Entrée invalide, réessayez", new Color(0.5f, 0.5f, 0.5f, 1f), TextAnimationType.Shake);
                 _inputField.text = null;
                 _inputField.ActivateInputField();
             }
             else if (VerifyWordInDouble(_inputField.text))
             {
-                _dialogViewManager.CreateNewMessage("Mot déjà utilisé pour un autre concept, réessayez", Color.red, TextAnimationType.Shake);
+                _dialogViewManager.CreateNewMessage("Mot déjà utilisé pour un autre concept, réessayez", new Color(0.5f, 0.5f, 0.5f, 1f), TextAnimationType.Shake);
                 _inputField.text = null;
                 _inputField.ActivateInputField();
             }
@@ -110,7 +110,7 @@ public class PlayerEntries : MonoBehaviour
                 _currentWord._word = _inputField.text;
                 string factorizedWord = _inputField.text.ToLower();
                 factorizedWord = FirstCharacterToUpper(factorizedWord);
-                _dialogViewManager.CreateNewMessage(factorizedWord, Color.blue, TextAnimationType.Wave);
+                _dialogViewManager.CreateNewMessage(factorizedWord, new Color(1f, 1f, 1f, 1f), TextAnimationType.Wave);
                 GameObject msg = Instantiate(_prefabWord, _contentLibraryView);
 
 
@@ -183,7 +183,7 @@ public class PlayerEntries : MonoBehaviour
 
             if (isValid)
             {
-                _dialogViewManager.CreateNewMessage(_inputField.text, Color.cornflowerBlue, TextAnimationType.Rainbow);
+                _dialogViewManager.CreateNewMessage(_inputField.text, new Color(1f, 1f, 1f, 1f), TextAnimationType.Wave);
                 _isSentencing = false; // On arrête de parler
                 _currentSentence.Clear();
                 _inputField.text = null;
@@ -213,12 +213,12 @@ public class PlayerEntries : MonoBehaviour
 
         if (_currentSentence.Count > expected.Count)
         {
-            _dialogViewManager.CreateNewMessage("Trop d'informations", Color.red, TextAnimationType.Shake);
+            _dialogViewManager.CreateNewMessage("Trop d'informations", new Color(0.5f, 0.5f, 0.5f, 1f), TextAnimationType.Shake);
             return false;
         }
         if (_currentSentence.Count < expected.Count)
         {
-            _dialogViewManager.CreateNewMessage("Pas assez d'informations", Color.red, TextAnimationType.Shake);
+            _dialogViewManager.CreateNewMessage("Pas assez d'informations", new Color(0.5f, 0.5f, 0.5f, 1f), TextAnimationType.Shake);
             return false;
         }
 
@@ -226,7 +226,7 @@ public class PlayerEntries : MonoBehaviour
         {
             if (!_currentSentence.Contains(expected[i]))
             {
-                _dialogViewManager.CreateNewMessage("Mauvaise information", Color.red, TextAnimationType.Shake);
+                _dialogViewManager.CreateNewMessage("Mauvaise information", new Color(0.5f, 0.5f, 0.5f, 1f), TextAnimationType.Shake);
                 return false;
             }
         }
@@ -302,7 +302,7 @@ public class PlayerEntries : MonoBehaviour
             newWord._word.ToLower();
             newWord._word = FirstCharacterToUpper(newWord._word);
 
-            _dialogViewManager.CreateNewMessage($"Fusion de {wordOne._word} et {wordTwo._word} pour créer {newWord._word}", Color.magenta, TextAnimationType.Rainbow);
+            _dialogViewManager.CreateNewMessage($"Fusion de {wordOne._word} et {wordTwo._word} pour créer {newWord._word}", new Color(1f, 1f, 1f, 1f), TextAnimationType.Rainbow);
             GameObject msg = Instantiate(_prefabWord, _contentLibraryView);
             VerifyElementInDouble(newWord._element);
             _wordButtons.Add(msg);
@@ -320,7 +320,7 @@ public class PlayerEntries : MonoBehaviour
         }
         else
         {
-            _dialogViewManager.CreateNewMessage($"Aucune fusion possible entre {wordOne._word} et {wordTwo._word}", Color.red, TextAnimationType.None);
+            _dialogViewManager.CreateNewMessage($"Aucune fusion possible entre {wordOne._word} et {wordTwo._word}", new Color(0.5f, 0.5f, 0.5f, 1f), TextAnimationType.None);
             _fusionWords.Clear();
             _isFusioning = true;
         }

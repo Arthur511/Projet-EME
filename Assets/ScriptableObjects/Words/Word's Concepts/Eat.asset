@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Eat
   m_EditorClassIdentifier: 
   _word: 
-  _element: Eat
+  _element: Manger
+  _parentA: {fileID: 0}
+  _parentB: {fileID: 0}

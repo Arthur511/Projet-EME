@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Tree
   m_EditorClassIdentifier: 
   _word: 
-  _element: Tree
+  _element: Arbre
   _parentA: {fileID: 0}
   _parentB: {fileID: 0}

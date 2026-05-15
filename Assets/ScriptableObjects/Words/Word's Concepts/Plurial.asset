@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Plurial
   m_EditorClassIdentifier: 
   _word: 
-  _element: Plurial
+  _element: Pluriel
   _parentA: {fileID: 0}
   _parentB: {fileID: 0}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Thank
   m_EditorClassIdentifier: 
   _word: 
-  _element: Thank
+  _element: Merci
   _parentA: {fileID: 0}
   _parentB: {fileID: 0}
