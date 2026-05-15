@@ -15,80 +15,80 @@ MonoBehaviour:
   StoryDialogs:
   - type: 0
     Text: "Malheur dans la tribu, le fils du chef est tomb\xE9 malade !"
-    Color: {r: 0.509434, g: 0.252314, b: 0.252314, a: 1}
+    Color: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
-    animationType: 3
+    animationType: 2
   - type: 0
     Text: Les membres ne savent que faire.
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
     animationType: 0
   - type: 0
     Text: Vous cherchez dans votre esprit une solution.
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
     animationType: 0
   - type: 0
     Text: "Vous vous rappelez quelque chose : il existe une plante miraculeuse capable
       de v\xE9ritables prouesses."
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
-    animationType: 5
+    animationType: 6
   - type: 0
     Text: Vous vous agitez alors pour essayer de vous faire comprendre.
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
-    animationType: 0
+    animationType: 2
   - type: 1
     Text: "Tous le monde vous regarde avec des yeux ronds. Vous prononcez le premier
       son qui vous passe par la t\xEAte en montrant du doigt une <b>fleur</b>"
-    Color: {r: 0.2772339, g: 0.5398206, b: 0.6603774, a: 1}
+    Color: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
     word: {fileID: 11400000, guid: d1382af167b9e4b4c827bf712f239880, type: 2}
     wordsToRespond: []
     animationType: 1
   - type: 2
     Text: "L'auditoire vous regarde, surpris. Vous r\xE9p\xE9tez le son en vous saisissant
       de la <b>fleur</b> que vous d\xE9signiez. "
-    Color: {r: 0.7924528, g: 0.6711042, b: 0.20558919, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 0}
     wordsToRespond:
     - {fileID: 11400000, guid: d1382af167b9e4b4c827bf712f239880, type: 2}
-    animationType: 0
+    animationType: 7
   - type: 0
     Text: "Vous la l\xE2chez ensuite et faites de grands signes de bras. Certains
       comprennent vos actions et partent chercher une tr\xE8s grande quantit\xE9
       de fleurs."
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
     animationType: 0
   - type: 0
     Text: "Mais aucune ne correspond \xE0 celle que vous avez en m\xE9moire."
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
     animationType: 0
   - type: 0
     Text: Il s'agit d'une fleur <b>rouge</b> vive.
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
-    animationType: 0
+    animationType: 6
   - type: 1
     Text: 'Alors vous montrez du doigt un bol contenant un liquide de couleur rouge
       et prononcez :'
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 11400000, guid: a9f8de76aac594041af48f8c95ad7895, type: 2}
     wordsToRespond: []
-    animationType: 0
+    animationType: 1
   - type: 2
     Text: "Del\xE0, vous pr\xE9cisez votre id\xE9e."
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 0}
     wordsToRespond:
     - {fileID: 11400000, guid: a9f8de76aac594041af48f8c95ad7895, type: 2}
@@ -96,40 +96,40 @@ MonoBehaviour:
     animationType: 0
   - type: 0
     Text: Un homme comprend qu'il s'agit du bol.
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
     animationType: 0
   - type: 0
     Text: "Il s'en empare et s'appr\xEAte \xE0 renverser le contenu sur les fleurs."
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 0.40784317, g: 0.40784317, b: 0.40784317, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
     animationType: 0
   - type: 1
     Text: "Vous l'arr\xEAtez imm\xE9diatement, et chercher un mot-particule pour
       parler de couleur."
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 11400000, guid: 8ecfd69ffc8a90548af8bb0df721a644, type: 2}
     wordsToRespond: []
-    animationType: 0
+    animationType: 6
   - type: 4
     Text: "Puis vous vous empressez de m\xE9langer ce nouveau terme \xE0 celui de
       la fleur. "
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
-    word: {fileID: 11400000, guid: 8ecfd69ffc8a90548af8bb0df721a644, type: 2}
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    word: {fileID: 0}
     wordsToRespond: []
     animationType: 0
   - type: 0
     Text: "Del\xE0 vous prononcez plusieurs fois le mot \"ROUGE\", en d\xE9signant
       quatre \xE0 cinq \xE9l\xE9ments de cette couleur."
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
-    animationType: 0
+    animationType: 1
   - type: 2
     Text: "Vous r\xE9p\xE9tez enfin votre demande initiale."
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 0}
     wordsToRespond:
     - {fileID: 11400000, guid: d1382af167b9e4b4c827bf712f239880, type: 2}
@@ -138,32 +138,32 @@ MonoBehaviour:
   - type: 0
     Text: "Et enfin la miraculeuse plante est trouv\xE9. Le chef vous demande maintenant
       ce qu'il faut faire."
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
     animationType: 0
   - type: 1
     Text: "Vous vous saisissez d'une baie, et montrer ensuite d'une graine, de racines,
       de poissons, tout \xE9l\xE9ments comestibles, et dites : "
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 11400000, guid: 78b1d9d8ec648c94dbb04f4fc2b5f102, type: 2}
     wordsToRespond: []
     animationType: 0
   - type: 1
     Text: 'Vous posez votre doigt sur votre bouche : '
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 11400000, guid: b325fa4218a3f1a4c8065506abccc102, type: 2}
     wordsToRespond: []
     animationType: 0
   - type: 4
     Text: Enfin vous MANGEZ la baie.
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 1, g: 1, b: 1, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
     animationType: 0
   - type: 2
     Text: Il faut que l'enfant mange la fleur rouge.
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
     word: {fileID: 0}
     wordsToRespond:
     - {fileID: 11400000, guid: e5edc0393a0a69d40945e4a07eeb403a, type: 2}
@@ -173,19 +173,19 @@ MonoBehaviour:
   - type: 0
     Text: "On fait ing\xE9rer la fleur rouge \xE0 l'enfant, qui, le lendemain arpente
       le campement de la tribu en courant."
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
     animationType: 0
   - type: 0
     Text: "Le chef, heureux, vient \xE0 votre rencontre pour vous remerciez"
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 0.40784317, g: 0.40784317, b: 0.40784317, a: 1}
     word: {fileID: 0}
     wordsToRespond: []
-    animationType: 0
+    animationType: 5
   - type: 3
     Text: Mui
-    Color: {r: 0.50980395, g: 0.2509804, b: 0.2509804, a: 1}
+    Color: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 1}
     word: {fileID: 11400000, guid: 36d4ce984b8624244962f1ebffec7bdf, type: 2}
     wordsToRespond: []
-    animationType: 0
+    animationType: 5

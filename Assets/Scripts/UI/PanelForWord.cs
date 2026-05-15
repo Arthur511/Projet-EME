@@ -20,16 +20,19 @@ public class PanelForWord : MonoBehaviour
         else
         {
             Instance = this;
-            _panelForWord.SetActive(false);
+            _panelForWord.SetActive(false); 
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        _rectTransform.position = Mouse.current.position.ReadValue() + new Vector2(170, 80);
+        if (Mouse.current.position.ReadValue().y > 760)
+            _rectTransform.position = Mouse.current.position.ReadValue() + new Vector2(240, -160);
+        else
+            _rectTransform.position = Mouse.current.position.ReadValue() + new Vector2(240, 160);
     }
-    
+
     public void ShowPanel(Word word)
     {
         _wordText.text = word._word;

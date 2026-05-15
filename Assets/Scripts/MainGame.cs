@@ -18,6 +18,11 @@ public class MainGame : MonoBehaviour
     //[SerializeField] LayerMask _wordLayer;
     [SerializeField] GameObject _firstQuest;
 
+    [Header("Cursor")]
+    [SerializeField] Texture2D _cursorDefault;
+    [SerializeField] Texture2D _cursorHover;
+
+
     bool _inQuest = false;
     Quest _currentQuest;
     bool _isInFusionWordMode = false;
@@ -30,6 +35,7 @@ public class MainGame : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Cursor.SetCursor(_cursorDefault, Vector2.zero, CursorMode.Auto);
         ToolsMethods.SpawnScaleSmooth(_firstQuest);
     }
 

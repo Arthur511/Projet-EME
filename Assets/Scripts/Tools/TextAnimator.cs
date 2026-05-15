@@ -26,7 +26,10 @@ public class TextAnimator : MonoBehaviour
     float[] _sharpRotationAngles;
     float _currentTimerSharpRotation = 0f;
     //float _currentTimerSharpRotation;
-    float _animationTimer = 1f;
+
+    bool _useTimer = false;
+    float _animationDuration = 1f;
+    float _currentAnimationTimer = 1f;
 
     // À initialiser quand le texte change
 
@@ -36,39 +39,38 @@ public class TextAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_animationTimer > 0f)
+
+        if (CurrentTextAnimation == TextAnimationType.None) return;
+
+        // Gère le timer
+        if (_useTimer)
         {
-            if (CurrentTextAnimation == TextAnimationType.SharpRotate)
+            _currentAnimationTimer += Time.deltaTime;
+            if (_currentAnimationTimer >= _animationDuration)
             {
-                _currentTimerSharpRotation += Time.deltaTime;
-                if (_currentTimerSharpRotation >= 1f)
-                {
-                    // Nouveau angle aléatoire pour chaque lettre
-                    for (int k = 0; k < _sharpRotationAngles.Length; k++)
-                        _sharpRotationAngles[k] = UnityEngine.Random.Range(-Mathf.PI, Mathf.PI);
-
-                    _currentTimerSharpRotation = 0f;
-                }
+                CurrentTextAnimation = TextAnimationType.None;
+                _currentTextTMP.ForceMeshUpdate();
+                _currentAnimationTimer = 0f;
+                return;
             }
-
-
-            _currentTextTMP.ForceMeshUpdate();
-            _currentTextMesh = _currentTextTMP.mesh;
-
-            var nbChar = _currentTextTMP.textInfo.characterCount;
-
-
-            for (int i = 0; i < nbChar; i++) // Pour chaque caractère du texte
-            {
-                var charInfo = _currentTextTMP.textInfo.characterInfo[i]; // On récupère les infos du caractère
-                if (!charInfo.isVisible) continue;
-
-                LaunchAnimation(CurrentTextAnimation, i);
-            }
-
-
-            _currentTextTMP.UpdateVertexData(TMP_VertexDataUpdateFlags.Vertices | TMP_VertexDataUpdateFlags.Colors32); // On applique visuellement les modifications précédentes sur les vertex
         }
+        _currentTextTMP.ForceMeshUpdate();
+        _currentTextMesh = _currentTextTMP.mesh;
+
+        var nbChar = _currentTextTMP.textInfo.characterCount;
+
+
+        for (int i = 0; i < nbChar; i++) // Pour chaque caractère du texte
+        {
+            var charInfo = _currentTextTMP.textInfo.characterInfo[i]; // On récupère les infos du caractère
+            if (!charInfo.isVisible) continue;
+
+            LaunchAnimation(CurrentTextAnimation, i);
+        }
+
+
+        _currentTextTMP.UpdateVertexData(TMP_VertexDataUpdateFlags.Vertices | TMP_VertexDataUpdateFlags.Colors32); // On applique visuellement les modifications précédentes sur les vertex
+
     }
 
 
@@ -77,9 +79,17 @@ public class TextAnimator : MonoBehaviour
         _sharpRotationAngles = new float[_currentTextTMP.textInfo.characterCount];
     }
 
+    public void StartAnimation(TextAnimationType animationType, float duration)
+    {
+        CurrentTextAnimation = animationType;
+        _useTimer = true;
+        _animationDuration = duration;
+        _currentAnimationTimer = 0f;
+    }
+
     private void LaunchAnimation(TextAnimationType animationType, int i)
     {
-        
+
         switch (animationType)
         {
             case TextAnimationType.Wave:
@@ -262,7 +272,7 @@ public class TextAnimator : MonoBehaviour
         int vertexIndex = _currentTextTMP.textInfo.characterInfo[i].vertexIndex; // On récupère l'index de son premier vertex (Un caractère est composé de 4 vertices)
 
         float hue = (Time.time * 0.5f + i * 0.1f) % 1f; // On calcule la teinte en fonction du temps et de l'index du caractère
-        Color color = Color.HSVToRGB(hue, 1f, 1f); // On convertit la teinte en couleur RGB
+        Color color = Color.HSVToRGB(0f, 0f, hue); // On convertit la teinte en couleur RGB
 
         for (int j = 0; j < 4; j++)
             _currentTextTMP.textInfo.meshInfo[meshIndex].colors32[vertexIndex + j] = color; // On applique la couleur à chacun des 4 vertices du caractère

@@ -43,7 +43,6 @@ public class DialogViewManager : MonoBehaviour
         Debug.Log("Message height: " + msgHeight);
         Destroy(temp);
         StartCoroutine(MoveMessages(messagesToMove, msgHeight, text, color, textAnimation));
-
     }
 
     public void InitializeCurrentStory()
@@ -153,12 +152,13 @@ public class DialogViewManager : MonoBehaviour
         GameObject msg = Instantiate(_prefabMessage, _contentScrollView);
         msg.GetComponentInChildren<TextMeshProUGUI>().text = text;
         msg.GetComponentInChildren<TextMeshProUGUI>().color = color;
+
         _messages.Add(msg);
 
         if (textAnimation != TextAnimationType.None)
         {
             var animator = msg.AddComponent<TextAnimator>();
-            animator.CurrentTextAnimation = textAnimation;
+            animator.StartAnimation(textAnimation, 3f);
         }
     }
 
